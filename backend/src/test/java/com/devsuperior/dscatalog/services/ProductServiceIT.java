@@ -1,4 +1,4 @@
-/*package com.devsuperior.dscatalog.services;
+package com.devsuperior.dscatalog.services;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,7 +52,7 @@ public class ProductServiceIT {
 	public void findAllPagedShouldReturnSortedPageWhenSortByName() {
 		
 		page = PageRequest.of(0, 10, Sort.by("name"));
-		result = service.findAllPaged(page);
+		result = service.findAllPaged(0L, "",page);
 		
 		Assertions.assertFalse(result.isEmpty());
 		Assertions.assertEquals("Macbook Pro", result.getContent().get(0).getName());
@@ -64,7 +64,7 @@ public class ProductServiceIT {
 	public void findAllPagedShouldReturnEmptyPageWhenPageDoesNotExists() {
 		
 		page = PageRequest.of(50, 10);
-		result = service.findAllPaged(page);
+		result = service.findAllPaged(0L, "",page);
 		
 		Assertions.assertTrue(result.isEmpty());		
 	}
@@ -73,7 +73,7 @@ public class ProductServiceIT {
 	public void findAllPagedShouldReturnPaged() {
 		
 		page = PageRequest.of(0, 10);
-		result = service.findAllPaged(page);
+		result = service.findAllPaged(0L, "",page);
 		
 		Assertions.assertFalse(result.isEmpty());
 		Assertions.assertEquals(0, result.getNumber());
@@ -97,4 +97,4 @@ public class ProductServiceIT {
 			service.delete(nonExistingId);
 		});	
 	}
-}*/
+}
