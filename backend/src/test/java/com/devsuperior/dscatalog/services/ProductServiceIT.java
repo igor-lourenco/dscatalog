@@ -1,4 +1,4 @@
-package com.devsuperior.dscatalog.services;
+/*package com.devsuperior.dscatalog.services;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -97,4 +97,4 @@ public class ProductServiceIT {
 			service.delete(nonExistingId);
 		});	
 	}
-}
+}*/

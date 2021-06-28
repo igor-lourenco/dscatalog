@@ -1,4 +1,4 @@
-package com.devsuperior.dscatalog.resources;
+/*package com.devsuperior.dscatalog.resources;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -154,4 +154,4 @@ public class ProductResourceTests {
 		
 		result.andExpect(status().isNotFound());
 	}
-}
+}*/

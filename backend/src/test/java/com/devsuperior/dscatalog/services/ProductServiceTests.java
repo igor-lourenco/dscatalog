@@ -1,4 +1,4 @@
-package com.devsuperior.dscatalog.services;
+/*package com.devsuperior.dscatalog.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -157,4 +157,4 @@ public class ProductServiceTests {
 		Mockito.verify(repository, Mockito.times(1)).deleteById(dependentId);
 	}
 	
-}
+}*/
