@@ -1,9 +1,13 @@
 import './assets/styles/custom.scss';
 import './App.css';
+import Navbar from './components/Navbar';
 
-function App() {
-  return (
-    <h1>Olá Igor</h1>
+const App = () => {
+  return(
+    <>
+     <Navbar />
+     <h1>Olá Igor</h1>
+     </>
   );
 }
 
