@@ -1,12 +1,12 @@
 import './assets/styles/custom.scss';
-import './App.css';
-import Navbar from './components/Navbar';
+import './App.css'
+import Home from './pages/Home';
+import Catalog from 'pages/Catalog';
 
 const App = () => {
   return(
     <>
-     <Navbar />
-     <h1>Olá Igor</h1>
+     <Catalog/>
      </>
   );
 }
