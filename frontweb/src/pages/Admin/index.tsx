@@ -1,4 +1,13 @@
+import Navbar from "./Navbar";
+
 const Admin = () => {
-  return <h6>Tela Admin</h6>;
+  return (
+    <div className="admin-container">
+      <Navbar />
+      <div className="admin-content">
+        <h1>Conteúdo</h1>
+      </div>
+    </div>
+  );
 };
 export default Admin;
