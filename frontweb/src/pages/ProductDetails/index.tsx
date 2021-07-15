@@ -1,35 +1,49 @@
-import {ReactComponent as ArrowIcon} from 'assets/images/Arrow.svg';
+import { ReactComponent as ArrowIcon } from 'assets/images/Arrow.svg';
 import ProductPrice from 'components/ProductPrice';
-import './styles.css'
+import './styles.css';
 import { Link } from 'react-router-dom';
+import { Product } from 'types/product';
+import axios from 'axios';
+import { BASE_URL } from 'util/requests';
+import { useState, useEffect } from 'react';
 
 const ProductDetails = () => {
+  const [product, setProduct] = useState<Product>();
+
+  useEffect(() => {
+    axios.get(BASE_URL + '/products/1').then((response) => {
+      setProduct(response.data);
+    });
+  }, []);
+
   return (
     <div className="product-details-container">
       <div className="base-card product-details-card">
         <Link to="/products">
-        <div className="goback-container">
+          <div className="goback-container">
             <ArrowIcon />
             <h2>VOLTAR</h2>
-        </div>
+          </div>
         </Link>
         <div className="row">
           <div className="col-xl-6">
-              <div className="img-container">
-                  <img src="https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/1-big.jpg" alt="nome do produto" />
-
-              </div>
-              <div className="name-price-container">
-                  <h1>Nome do produto</h1>
-                  <ProductPrice price={13.65}/>
-              </div>
+            <div className="img-container">
+              <img src={product?.imgUrl} alt={product?.name} />
+            </div>
+            <div className="name-price-container">
+              <h1>{product?.name}</h1>
+              {product && <ProductPrice price={product?.price} />}
+            </div>
           </div>
           <div className="col-xl-6">
-              <div className="description-container">
-                  <h2>Descrição do produto</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est iste reiciendis officia dolores nemo nesciunt necessitatibus consequatur eius at rem.</p>
-
-              </div>
+            <div className="description-container">
+              <h2>Descrição do produto</h2>
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est
+                iste reiciendis officia dolores nemo nesciunt necessitatibus
+                consequatur eius at rem.
+              </p>
+            </div>
           </div>
         </div>
       </div>

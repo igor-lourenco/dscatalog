@@ -1,19 +1,16 @@
 .product-details-container{
     padding: 10px;
-    border: 1px solid red;
     font-size: 24px;
 }
 
 .product-details-card{
     padding: 10px;
-    border: 1px solid green;
 }
 
 .goback-container {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-    border: 1px solid blue;
 }
 
 .goback-container svg {
@@ -43,7 +40,6 @@
 }
 
 .name-price-container {
-    border: 1px solid #000;
     margin-bottom: 20px;
 }
 
