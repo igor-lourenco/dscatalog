@@ -14,7 +14,7 @@ type LoginResponse = {
 
 type Role = 'ROLE_OPERATOR' | 'ROLE_ADMIN';
 
-type TokenData = {
+export type TokenData = {
     exp : number;
     user_name : string;
     authorities: Role[];
@@ -63,6 +63,11 @@ export const saveAuthData = (obj: LoginResponse) => { //salva os dados da autori
 export const getAuthData = () => { //retorna o dado do tipo LoginResponse
     const str = localStorage.getItem(tokenKey) ?? "{}";
     return JSON.parse(str) as LoginResponse;
+}
+
+
+export const removeAuthData = () => {
+    localStorage.removeItem(tokenKey) //remove o token do localStorage
 }
 
 // Add a request interceptor

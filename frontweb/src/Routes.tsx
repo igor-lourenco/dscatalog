@@ -28,7 +28,6 @@ const Routes = () => (
       <Route path="/admin">
         <Admin />
       </Route>
-
     </Switch>
   </Router>
 );
