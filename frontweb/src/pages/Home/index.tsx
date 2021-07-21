@@ -2,7 +2,8 @@ import { ReactComponent as MainImage } from 'assets/images/main-image.svg';
 import './styles.css';
 import ButonIcon from '../../components/ButtonIcon';
 import { Link } from 'react-router-dom';
-import { isAuthenticated } from 'util/requests';
+import { isAuthenticated } from 'util/auth';
+
 
 const Home = () => {
   return (
