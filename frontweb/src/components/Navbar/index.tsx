@@ -6,38 +6,34 @@ import {
   getTokenData,
   isAuthenticated,
   removeAuthData,
-  TokenData,
 } from 'util/requests';
-import { useState } from 'react';
+
 import { useEffect } from 'react';
 import history from 'util/history';
-
-type AuthData = {
-  authenticated: boolean;
-  tokenData?: TokenData;
-};
+import { useContext } from 'react';
+import { AuthContext } from 'AuthContext';
 
 const Navbar = () => {
-  const [authData, setAuthData] = useState<AuthData>({ authenticated: false });
+
+  const {authContextData, setAuthContextData} = useContext(AuthContext);
 
   useEffect(() => {
-    if (isAuthenticated()) {
-      // testa se o usuario esta autenticado
-      setAuthData({
+    if (isAuthenticated()) {  // testa se o usuario esta autenticado
+      setAuthContextData({
         authenticated: true, //retorna verdadeiro
         tokenData: getTokenData(), //pega o token do usuario
       });
     } else {
-      setAuthData({
+      setAuthContextData({
         authenticated: false, //retorna falso
       });
     }
-  }, []);
+  }, [setAuthContextData]);
 
   const handleLogoutClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault(); //não haver navegação do link
     removeAuthData(); //função pra remover o token do localStorage
-    setAuthData({
+    setAuthContextData({
       authenticated: false, // funçao pra passar o autenticado falso
     });
     history.replace('/'); //redireciona o usuario para a tela home
@@ -83,9 +79,9 @@ const Navbar = () => {
         </div>
 
         <div className="nav-login-logout">
-          {authData.authenticated ? (
+          {authContextData.authenticated ? (
             <>
-            <span className="nav-username">{authData.tokenData?.user_name}</span>
+            <span className="nav-username">{authContextData.tokenData?.user_name}</span>
             <a href="#LOGOUT" onClick={handleLogoutClick}>
               LOGOUT
             </a>

@@ -2,8 +2,9 @@ import { Link, useHistory } from 'react-router-dom';
 import ButtonIcon from 'components/ButtonIcon';
 import { useForm } from 'react-hook-form';
 import './styles.css';
-import { getAuthData, requestBackendLogin, saveAuthData } from 'util/requests';
-import { useState } from 'react';
+import { getTokenData, requestBackendLogin, saveAuthData } from 'util/requests';
+import { useContext, useState } from 'react';
+import { AuthContext } from 'AuthContext';
 
 type FormData = {
   username: string;
@@ -11,6 +12,7 @@ type FormData = {
 };
 
 const Login = () => {
+  const {setAuthContextData} = useContext(AuthContext);
   const [hasError, setHasError] = useState(false);
   const {
     register,
@@ -23,12 +25,13 @@ const Login = () => {
   const onSubmit = (formData: FormData) => {
     requestBackendLogin(formData)
       .then((response) => {
-        setHasError(false);
-        const token = getAuthData().access_token;
-        history.push('/admin')
-        console.log('Token gerado: ' + token)
-        saveAuthData(response.data);
-        console.log('Sucesso', response);
+        saveAuthData(response.data); //salva os dados no locaStorage
+        setHasError(false);  // fala que não teve erro no login
+        setAuthContextData({ // Atualiza para Logout/Login na tela do usuario 
+          authenticated: true,
+          tokenData: getTokenData()
+        })
+        history.push('/admin') //redireciona para tela de admin
       })
       .catch((error) => {
         setHasError(true);
