@@ -31,6 +31,8 @@ const Form = () => {
 
     requestBackend(config).then((response) => {
       console.log(response.data); //imprime os dados
+      history.push('/admin/products'); 
+      
     });
   };
 
