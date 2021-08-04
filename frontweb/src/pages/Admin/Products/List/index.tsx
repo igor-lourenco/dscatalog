@@ -11,6 +11,10 @@ const List = () => {
   const [page, setPage] = useState<SpringPage<Product>>();
 
   useEffect(() => {
+    getProducts(); //chama a função
+  }, []);
+
+  const getProducts = () => { //função para pegar todos os produtos no backend
     const config: AxiosRequestConfig = {
       method: 'GET',
       url: `/products`,
@@ -20,11 +24,12 @@ const List = () => {
       },
     };
     //setIsLoading(true);
-    requestBackend(config).then((response) => { //passa o config como parametro no requestBackend
+    requestBackend(config).then((response) => {
+      //passa o config como parametro no requestBackend
       setPage(response.data); //atribui os dados no setPage
     });
     // .finally(() => setIsLoading(false));
-  }, []);
+  };
 
   return (
     <div className="product-crud-container">
@@ -41,7 +46,9 @@ const List = () => {
       <div className="row">
         {page?.content.map((product) => (
           <div key={product.id} className="col-sm-6 col-md-12">
-            <ProductCrudCard product={product} />
+            <ProductCrudCard product={product}  
+            onDelete={() => getProducts()} //evento que chama a lista atualizada
+             />
           </div>
         ))}
       </div>

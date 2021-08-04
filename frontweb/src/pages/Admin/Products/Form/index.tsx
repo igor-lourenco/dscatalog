@@ -20,34 +20,34 @@ const Form = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue, //
+    setValue, //permite definir o valor de algum atributo
   } = useForm<Product>();
 
   useEffect(() => {
-    if (isEditing) {
-      requestBackend({ url: `/products/${productId}` }).then((response) => {
-        const product = response.data as Product;
-        setValue('name', product.name);
+    if (isEditing) { //se estiver na rota de editar
+      requestBackend({ url: `/products/${productId}` }).then((response) => { //carrega o produto do id pego na rota url
+        const product = response.data as Product; //atribui os dados carregados do tipo Product na const
+        setValue('name', product.name); //coloca os valores no formulario
         setValue('price', product.price);
         setValue('description', product.description);
         setValue('imgUrl', product.imgUrl);
         setValue('categories', product.categories);
       });
     }
-  }, [isEditing, productId, setValue]);
+  }, [isEditing, productId, setValue]); //caso mudar o valor de algum, a função atualiza os dados 
 
   const onSubmit = (formData: Product) => {
     const data = {
       ...formData,
-      imgUrl: isEditing
-        ? formData.imgUrl
+      imgUrl: isEditing // se estiver editando 
+        ? formData.imgUrl //mantém o que estava no formData
         : 'https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/1-big.jpg',
       categories: isEditing ? formData.categories : [{ id: 1, name: '' }],
     };
 
     const config: AxiosRequestConfig = {
-      method: isEditing ? 'PUT' : 'POST',
-      url: isEditing ? `/products/${productId}` : `/products`,
+      method: isEditing ? 'PUT' : 'POST', // se estiver editando, metodo 'PUT' senão 'POST' 
+      url: isEditing ? `/products/${productId}` : `/products`,// se estiver editando, metodo 'PUT' senão 'POST' 
       data: data, //atribui os dados passados na variavel data
       withCredentials: true, //passa token no header da requisição
     };
