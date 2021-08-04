@@ -1,5 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { useEffect } from 'react';
+import Select from 'react-select';
 import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import { Product } from 'types/product';
@@ -11,6 +12,14 @@ type UrlParams = { // tipo criado, pode ser mais d um em uma rota url
 };
 
 const Form = () => {
+
+
+  const options = [
+    {value: 'chocolate', label: 'Chocolate'},
+    {value: 'strawberry', label: 'Strawberry'},
+    {value: 'vanilla', label: 'Vanilla'}
+  ]
+
   const history = useHistory();
 
   const { productId } = useParams<UrlParams>(); //pega o parametro da url
@@ -86,6 +95,20 @@ const Form = () => {
                   {errors.name?.message}
                 </div>
               </div>
+
+
+              <div className="margin-bottom-30">
+               
+               <Select
+                options={options}
+                classNamePrefix="product-crud-select"
+                isMulti
+               />
+
+              </div>
+
+
+
               <div className="margin-bottom-30">
                 <input
                   {...register('price', {
