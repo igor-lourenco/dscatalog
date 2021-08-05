@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import { useEffect } from 'react';
 import Select from 'react-select';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import { Product } from 'types/product';
 import { requestBackend } from 'util/requests';
@@ -28,6 +28,7 @@ const Form = () => {
     handleSubmit,
     formState: { errors },
     setValue, //permite definir o valor de algum atributo
+    control // objeto de controle do hook form
   } = useForm<Product>();
 
   useEffect(() => { //função pra carrega do backend quando o componente for montado
@@ -36,7 +37,7 @@ const Form = () => {
     })
   }, []);
 
-  useEffect(() => {
+  useEffect(() => { // função pra carrega os dados do produto no formulário de editar
     if (isEditing) { //se estiver na rota de editar
       requestBackend({ url: `/products/${productId}` }).then((response) => { //carrega o produto do id pego na rota url
         const product = response.data as Product; //atribui os dados carregados do tipo Product na const
@@ -102,15 +103,28 @@ const Form = () => {
 
 
               <div className="margin-bottom-30">
-               
-               <Select
+              <Controller //
+              name='categories' //nome do campo, tem q ser igual o nome do estado e do tipo Product
+              rules={{required: true}} //regra de validação
+              control={control} 
+              render={({field}) => ( //integra o select do formulário com o campo gerenciado pelo react-hook-form
+                <Select {...field}
                 options={selectCategories} //categorias carregadas do backend
+                placeholder="Categoria"
                 classNamePrefix="product-crud-select"
                 isMulti
                 getOptionLabel={(category: Category) => category.name}  //recebe o item da lista e coloca o nome da categoria 
                 getOptionValue={(category: Category) => String(category.id)} //recebe o item da lista e coloca o valor da categoria
                />
 
+              )}
+              />
+              { //se não colocar nenhuma categoria na hora de adicionar algum produto novo
+                errors.categories &&  <div className="invalid-feedback d-block">
+                Campo obrigatório 
+              </div>
+              }
+               
               </div>
 
 
