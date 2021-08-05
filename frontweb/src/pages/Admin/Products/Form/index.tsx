@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Select from 'react-select';
 import { useForm, Controller } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
+import CurrencyInput from 'react-currency-input-field';
 import { Product } from 'types/product';
 import { requestBackend } from 'util/requests';
 import './styles.css';
@@ -52,11 +53,12 @@ const Form = () => {
 
   const onSubmit = (formData: Product) => {
     
+    const data = {...formData, price: String(formData.price).replace(',' , '.')}
 
     const config: AxiosRequestConfig = {
       method: isEditing ? 'PUT' : 'POST', // se estiver editando, metodo 'PUT' senão 'POST' 
       url: isEditing ? `/products/${productId}` : `/products`,// se estiver editando, metodo 'PUT' senão 'POST' 
-      data: formData, //atribui os dados passados na variavel data
+      data: data, //atribui os dados passados na variavel data
       withCredentials: true, //passa token no header da requisição
     };
 
@@ -121,21 +123,32 @@ const Form = () => {
               </div>
 
               <div className="margin-bottom-30">
-                <input
-                  {...register('price', {
-                    required: 'Campo obrigatório',
-                  })}
-                  type="text"
-                  className={`form-control base-input ${
-                    errors.price ? 'is-invalid' : ''
-                  }`} //mostra o campo vermelho
-                  placeholder="Preço do produto"
+                <Controller 
                   name="price"
+                  rules={{required: "Campo obrigatório"}}
+                  control={control}
+                  render={({field}) => (
+                    <CurrencyInput 
+                    placeholder="Preço"
+                    className={`form-control base-input ${
+                      errors.price ? 'is-invalid' : ''
+                    }`} //mostra o campo vermelho
+                    disableGroupSeparators={true} //desabilita o ponto de milhar
+                    value={field.value} // valor do campo
+                    onValueChange={field.onChange} //evento de quando mudar o estado do input
+                    />
+                  )}
                 />
+
+
+
                 <div className="invalid-feedback d-block">
                   {errors.price?.message}
                 </div>
               </div>
+
+
+              
 
               <div className="margin-bottom-30">
                 <input
