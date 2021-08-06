@@ -16,8 +16,6 @@ type UrlParams = { // tipo criado, pode ser mais d um em uma rota url
 
 const Form = () => {
 
-
-
   const history = useHistory();
 
   const { productId } = useParams<UrlParams>(); //pega o parametro da url
