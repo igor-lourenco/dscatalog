@@ -9,6 +9,7 @@ import { requestBackend } from 'util/requests';
 import './styles.css';
 import { useState } from 'react';
 import { Category } from 'types/category';
+import {toast} from 'react-toastify';
 
 type UrlParams = { // tipo criado, pode ser mais d um em uma rota url
   productId: string;
@@ -61,6 +62,7 @@ const Form = () => {
     };
 
     requestBackend(config).then((response) => {
+      toast.info('Produto cadastrado com sucesso!')
       console.log(response.data); //imprime os dados
       history.push('/admin/products');
     });
