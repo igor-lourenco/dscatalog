@@ -6,12 +6,16 @@ import './styles.css';
 import { useEffect, useState } from 'react';
 import { requestBackend } from 'util/requests';
 
-type ProductFilterData = {
+ export type ProductFilterData = {
   name: string;
   category: Category | null;
 };
 
-const ProductFilter = () => {
+type Props = {
+    onSubmitFilter : (data: ProductFilterData) => void
+}
+
+const ProductFilter = ({onSubmitFilter} : Props) => {
   const [selectCategories, setSelectCategories] = useState<Category[]>([]);
   const {
     register,
@@ -22,7 +26,7 @@ const ProductFilter = () => {
   } = useForm<ProductFilterData>();
 
   const onSubmit = (formData: ProductFilterData) => {
-    console.log('enviou',  formData);
+    onSubmitFilter(formData);
   };
 
   const handleFormClear = () => { // função pra limpar os campos de busca
@@ -33,13 +37,12 @@ const ProductFilter = () => {
   const handleChangeCategory = (value: Category) => { //função pra enviar o formulário toda vez que mudar o valor do campo das categorias 
       setValue('category', value)
 
-      const obj : ProductFilterData = {
-          name: getValues('name'),
-          category: getValues('category')
+      const obj : ProductFilterData = { // const obj do tipo ProductFilterFata
+          name: getValues('name'), // pega o valor que tá no campo nome
+          category: getValues('category') // pega o valor que tá no campo da categoria
       }
 
-      console.log('Enviou', obj)
-
+      onSubmitFilter(obj);
   }
 
   useEffect(() => {

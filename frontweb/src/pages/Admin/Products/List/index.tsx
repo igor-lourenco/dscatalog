@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import Pagination from 'components/Pagination';
-import ProductFilter from 'components/ProductFilter';
+import ProductFilter, { ProductFilterData } from 'components/ProductFilter';
 import ProductCrudCard from 'pages/Admin/Products/ProductCrudCard';
 import { useCallback } from 'react';
 import { useEffect, useState } from 'react';
@@ -12,6 +12,7 @@ import './styles.css';
 
 type ControlComponentsData = {  // dados dos componentes de controle
   activePage: number; // número da página ativa, vindo do componente de paginação
+  filterData: ProductFilterData;
 }
 
 const List = () => {
@@ -19,11 +20,17 @@ const List = () => {
 
   const [controlComponentsData, setControlComponentsData] = useState<ControlComponentsData>(
     {//mantém o estado dos dados de todos os componentes que fazem algum controle da listagem
-    activePage: 0
+    activePage: 0,
+    filterData: {name: '', category: null}
   });
 
   const handlePageChange = (pageNumber: number) => { //atualiza o estado que o componente devolve
-    setControlComponentsData({activePage: pageNumber})
+    setControlComponentsData({activePage: pageNumber, filterData: controlComponentsData.filterData})
+  }
+
+  const handleSubmitFilter = (data : ProductFilterData) => {
+    setControlComponentsData({activePage: 0, filterData: data})
+
   }
 
   const getProducts = useCallback(() => {
@@ -34,6 +41,8 @@ const List = () => {
         params: {
           page: controlComponentsData.activePage, 
           size: 3,
+          name: controlComponentsData.filterData.name,
+          categoryId: controlComponentsData.filterData.category?.id
         },
       };
       //setIsLoading(true);
@@ -58,7 +67,7 @@ const List = () => {
           </button>
         </Link>
 
-        <ProductFilter />
+        <ProductFilter onSubmitFilter={handleSubmitFilter}/>
       </div>
 
       <div className="row">
@@ -73,6 +82,7 @@ const List = () => {
       <Pagination pageCount={(page) ? page.totalPages : 0}
        range={3}
        onChange={handlePageChange} 
+       forcePage={page?.number}
        />
     </div>
   );
