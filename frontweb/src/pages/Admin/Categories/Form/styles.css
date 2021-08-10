@@ -6,4 +6,25 @@
     font-size: 22px;
     letter-spacing: -0.015em;
     color: #263238;
+    margin-bottom: 20px;
+}
+
+.category-crud-input {
+    margin-bottom: 20px;
+}
+
+.category-crud-form-button {
+    margin-left: 20px;
+}
+
+@media(min-width: 576px){
+    .category-crud-form-buttons{
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .category-crud-form-buttons button {
+        width: 270px;
+    }
+
 }

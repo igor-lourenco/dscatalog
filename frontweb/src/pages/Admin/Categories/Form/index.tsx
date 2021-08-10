@@ -8,13 +8,13 @@ const Form = () => {
 
         <form action="">
             <div className="row">
-                <div className="">
+                <div className="category-crud-input">
                     <input type="text" className="form-control base-input" />
                 </div>
             </div>
-            <div>
+            <div className="category-crud-form-buttons">
                 <button className="btn btn-outline-danger">CANCELAR</button>
-                <button className="btn btn-outline-primary">SALVAR</button>
+                <button className="btn btn-outline-primary category-crud-form-button">SALVAR</button>
             </div>
         </form>
 
