@@ -9,7 +9,7 @@ const Categories = () => {
             <Route path="/admin/categories" exact>
                 <List />
             </Route>
-            <Route path="/admin/categories/:categoriesId" exact>
+            <Route path="/admin/categories/:categoryId" exact>
                 <Form />
             </Route>
         </Switch>

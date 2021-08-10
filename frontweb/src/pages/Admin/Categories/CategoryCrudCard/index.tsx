@@ -45,7 +45,7 @@ const CategoryCrudCard = ({ category }: Props) => {
         >
           EXCLUIR
         </button>
-        <Link to={`/admin/products/${category.id}`}>
+        <Link to={`/admin/categories/${category.id}`}>
           <button className="btn btn-outline-secondary category-crud-card-buttom">
             EDITAR
           </button>
