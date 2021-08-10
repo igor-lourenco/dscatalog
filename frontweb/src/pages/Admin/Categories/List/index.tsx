@@ -9,8 +9,9 @@ import './styles.css';
 
 const List = () => {
   const [page, setPage] = useState<SpringPage<Category>>();
+  
 
-  const getProducts = (pageNumber: number) => {
+  const getCategories = (pageNumber: number) => {
     const params: AxiosRequestConfig = {
       method: 'GET',
       url: `/categories`,
@@ -26,7 +27,7 @@ const List = () => {
   };
 
   useEffect(() => {
-    getProducts(0);
+    getCategories(0);
   }, []);
 
   return (
