@@ -2,4 +2,19 @@
     margin-bottom: 30px;
     padding: 20px;
   }
-  
+
+  .category-crud-card-name {
+      margin-bottom: 15px;
+  }
+
+  .category-crud-card-buttom {
+    margin-right: 20px;
+  }
+
+  @media(min-width: 768px){
+      .category-crud-card {
+          display: flex;
+          justify-content: space-between;align-items: center;
+      }
+      
+  }

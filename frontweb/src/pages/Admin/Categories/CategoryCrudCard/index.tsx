@@ -33,10 +33,10 @@ const CategoryCrudCard = ({ category }: Props) => {
 
   return (
     <div className="base-card category-crud-card">
-      <div className="category-crud-card-description">
-        <div className="category-crud-card-bottom-container">
+      <div className="category-crud-card-name">
+        
           <h6>{category.name}</h6>
-        </div>
+        
       </div>
       <div className="category-crud-card-buttons-container">
         <button
