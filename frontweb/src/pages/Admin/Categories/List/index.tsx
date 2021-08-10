@@ -1,12 +1,33 @@
+import { AxiosRequestConfig } from 'axios';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Category } from 'types/category';
+import { SpringPage } from 'types/vendor/spring';
+import { requestBackend } from 'util/requests';
 import CategoryCrudCard from '../CategoryCrudCard';
 import './styles.css';
 
 const List = () => {
-  const category = {
-    id: 1,
-    name: 'Livros',
+  const [page, setPage] = useState<SpringPage<Category>>();
+
+  const getProducts = (pageNumber: number) => {
+    const params: AxiosRequestConfig = {
+      method: 'GET',
+      url: `/categories`,
+      params: {
+        page: pageNumber,
+        size: 12,
+      },
+    };
+
+    requestBackend(params).then((response) => {
+      setPage(response.data);
+    });
   };
+
+  useEffect(() => {
+    getProducts(0);
+  }, []);
 
   return (
     <div className="category-crud-container">
@@ -20,18 +41,11 @@ const List = () => {
         <div className="base-card category-filter-container">search</div>
       </div>
       <div className="row">
-        <div className="col-sm-6 col-md-12">
-          <CategoryCrudCard category={category} />
-        </div>
-        <div className="col-sm-6 col-md-12">
-          <CategoryCrudCard category={category} />
-        </div>
-        <div className="col-sm-6 col-md-12">
-          <CategoryCrudCard category={category} />
-        </div>
-        <div className="col-sm-6 col-md-12">
-          <CategoryCrudCard category={category} />
-        </div>
+        {page?.content.map((category) => (
+          <div key={category.id} className="col-sm-6 col-md-12">
+            <CategoryCrudCard category={category} />
+          </div>
+        ))}
       </div>
     </div>
   );
