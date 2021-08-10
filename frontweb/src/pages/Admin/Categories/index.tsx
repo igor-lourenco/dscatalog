@@ -1,4 +1,5 @@
 import { Route, Switch } from "react-router-dom";
+import Form from "./Form";
 import List from "./List";
 
 
@@ -7,6 +8,9 @@ const Categories = () => {
         <Switch>
             <Route path="/admin/categories" exact>
                 <List />
+            </Route>
+            <Route path="/admin/categories/:categoriesId" exact>
+                <Form />
             </Route>
         </Switch>
     );

@@ -1,0 +1,25 @@
+.category-filter-container {
+  margin-bottom: 0;
+  padding: 15px;
+}
+.category-crud-bar-container {
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .category-crud-bar-container {
+    display: flex;
+    margin-bottom: 20px;
+  }
+
+  .category-filter-container {
+    margin-left: 20px;
+    flex: 1;
+    height: 60px;
+  }
+
+  .btn-crud-add {
+    height: 60px;
+    margin-bottom: 0;
+  }
+}
