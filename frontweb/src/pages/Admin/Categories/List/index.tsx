@@ -35,7 +35,7 @@ const List = () => {
           </button>
         </Link>
 
-        <div className="base-card category-filter-container">search</div>
+        
       </div>
       <div className="row">
         {page?.content.map((category) => (
