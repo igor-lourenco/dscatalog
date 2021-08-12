@@ -11,14 +11,10 @@ const List = () => {
   const [page, setPage] = useState<SpringPage<Category>>();
   
 
-  const getCategories = (pageNumber: number) => {
+  const getCategories = () => {
     const params: AxiosRequestConfig = {
       method: 'GET',
       url: `/categories`,
-      params: {
-        page: pageNumber,
-        size: 12,
-      },
     };
 
     requestBackend(params).then((response) => {
@@ -27,7 +23,7 @@ const List = () => {
   };
 
   useEffect(() => {
-    getCategories(0);
+    getCategories();
   }, []);
 
   return (
@@ -44,7 +40,8 @@ const List = () => {
       <div className="row">
         {page?.content.map((category) => (
           <div key={category.id} className="col-sm-6 col-md-12">
-            <CategoryCrudCard category={category} />
+            <CategoryCrudCard category={category} 
+            onDelete={() => getCategories()} />
           </div>
         ))}
       </div>

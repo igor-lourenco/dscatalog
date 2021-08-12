@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import { Category } from 'types/category';
 import { requestBackend } from 'util/requests';
+import { toast } from 'react-toastify';
 import './styles.css';
 
 type UrlParams = {
@@ -41,7 +42,10 @@ const Form = () => {
 
     requestBackend(params).then((response) => {
       console.log('salvo', response.data);
+      toast.success('Categoria cadastrada com sucesso!')
       history.push('/admin/categories'); 
+    }).catch(() => {
+        toast.error('Erro ao cadastrar a categoria!')
     });
   };
 
