@@ -26,7 +26,7 @@ describe('Product from create tests', () => {
   test('should show toast and redirect when submit form correctly', async () => {
     render(
       <Router history={history}>
-          <ToastContainer />
+        <ToastContainer />
         <Form />
       </Router>
     );
@@ -38,7 +38,7 @@ describe('Product from create tests', () => {
     const descriptionInput = screen.getByTestId('description');
     const categoriesInput = screen.getByLabelText('Categorias');
 
-    const submitButton = screen.getByRole('button', {name: /salvar/i})
+    const submitButton = screen.getByRole('button', { name: /salvar/i });
 
     userEvent.type(nameInput, 'Computador'); //simula a digitação no campo do nome do produto
     userEvent.type(priceInput, '1234.56'); //simula a digitação no campo do preço do produto
@@ -53,11 +53,29 @@ describe('Product from create tests', () => {
     userEvent.click(submitButton);
 
     await waitFor(() => {
-        const toastElement = screen.getByText('Produto cadastrado com sucesso!')
-        expect(toastElement).toBeInTheDocument();
+      const toastElement = screen.getByText('Produto cadastrado com sucesso!');
+      expect(toastElement).toBeInTheDocument();
     });
 
     expect(history.location.pathname).toEqual('/admin/products'); //testa o caminho redirecionado quando cadastra com sucesso
-    
+  });
+  test('should show 5 validation message when just clicking submit', async () => {
+    render(
+      <Router history={history}>
+        <ToastContainer />
+        <Form />
+      </Router>
+    );
+
+    //screen.debug();
+
+    const submitButton = screen.getByRole('button', { name: /salvar/i });
+
+    userEvent.click(submitButton);
+
+    await waitFor(() => {
+      const message = screen.getAllByAltText('Campo obrigatório');
+      expect(message).toHaveLength(5);
+    });
   });
 });
