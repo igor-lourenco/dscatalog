@@ -1,22 +1,6 @@
-import jwtDecode from 'jwt-decode';
-import { getAuthData } from './storage';
+import { getTokenData } from './token';
+import { Role } from 'types/role';
 
-export type Role = 'ROLE_OPERATOR' | 'ROLE_ADMIN';
-
-export type TokenData = {
-  exp: number;
-  user_name: string;
-  authorities: Role[];
-};
-
-export const getTokenData = (): TokenData | undefined => {
-  const LoginResponse = getAuthData(); //pega o token salvo e guarda na variavel
-  try {
-    return jwtDecode(LoginResponse.access_token) as TokenData;
-  } catch (error) {
-    return undefined;
-  }
-};
 
 export const isAuthenticated = (): boolean => {
   const tokenData = getTokenData(); //pega os dados do token
