@@ -4,36 +4,22 @@ import { Users } from 'types/users';
 import { requestBackend } from 'util/requests';
 import { toast } from 'react-toastify';
 import { AxiosRequestConfig } from 'axios';
-import { Roles } from 'types/roles';
-import Select from 'react-select';
-import { useState } from 'react';
 
 const Signup = () => {
   const history = useHistory();
-
-  const [selectRoles, setSelectRoles] = useState<Roles[]>([]);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    control, // objeto de controle do hook form
+     // objeto de controle do hook form
   } = useForm<Users>();
-
-  /*useEffect(() => {
-    //função pra carrega do backend quando o componente for montado
-    requestBackend({ url: '/users', method: 'POST' }).then((response) => {
-      setSelectRoles(response.data.content); //Atribui o dados da resposta do backend no setSelectCategories
-    });
-  }, []);*/
 
   const onSubmit = (formData: Users) => {
     const config: AxiosRequestConfig = {
       method: 'POST', // se estiver editando, metodo 'PUT' senão 'POST'
       url: `/users`, // se estiver editando, metodo 'PUT' senão 'POST'
       withCredentials: false, //passa token no header da requisição
-      
-    
     };
 
     requestBackend(config)
@@ -52,12 +38,6 @@ const Signup = () => {
   };
 
   return (
-
-
-
-
-
-    
     <div className="base-card login-card">
       <h1>Cadastrar</h1>
 
@@ -79,7 +59,6 @@ const Signup = () => {
           </div>
         </div>
 
-
         <div className="margin-bottom-30">
           <input
             {...register('lastName', {
@@ -98,8 +77,7 @@ const Signup = () => {
         </div>
 
         <div className="margin-bottom-30">
-
-        <input
+          <input
             {...register('email', {
               required: 'Campo obrigatório',
               pattern: {
@@ -108,23 +86,26 @@ const Signup = () => {
               },
             })}
             type="text"
-        className={`form-control base-input ${errors.email ? 'is-invalid' : ''}`} //mostra o campo vermelho
+            className={`form-control base-input ${
+              errors.email ? 'is-invalid' : ''
+            }`} //mostra o campo vermelho
             placeholder="Email"
             name="email"
           />
           <div className="invalid-feedback d-block">
             {errors.email?.message}
           </div>
-</div>
+        </div>
 
-<div className="margin-bottom-30">
-
-<input
+        <div className="margin-bottom-30">
+          <input
             {...register('password', {
               required: 'Campo obrigatório',
             })}
             type="password"
-            className={`form-control base-input ${errors.password ? 'is-invalid' : ''}`} //mostra o campo vermelho
+            className={`form-control base-input ${
+              errors.password ? 'is-invalid' : ''
+            }`} //mostra o campo vermelho
             placeholder="Senha"
             name="password"
           />
@@ -133,30 +114,17 @@ const Signup = () => {
           {errors.password?.message}
         </div>
 
-
-
-
-
-
-
-
-
-         
-
-              <div className="product-crud-buttons-container">
-            <button
-              className="btn btn-outline-danger product-crud-button"
-              onClick={handleCancel}
-            >
-              CANCELAR
-            </button>
-            <button className="btn btn-outline-primary  product-crud-button">
-              SALVAR
-            </button>
-          </div>
-          
-        
-    
+        <div className="product-crud-buttons-container">
+          <button
+            className="btn btn-outline-danger product-crud-button"
+            onClick={handleCancel}
+          >
+            CANCELAR
+          </button>
+          <button className="btn btn-outline-primary  product-crud-button">
+            SALVAR
+          </button>
+        </div>
       </form>
     </div>
   );
