@@ -30,7 +30,6 @@ const List = () => {
 
   const handleSubmitFilter = (data : ProductFilterData) => {
     setControlComponentsData({activePage: 0, filterData: data})
-
   }
 
   const getProducts = useCallback(() => {
@@ -61,12 +60,13 @@ const List = () => {
   return (
     <div className="product-crud-container">
       <div className="product-crud-bar-container">
+        <div className="btn-margin-right">
         <Link to="/admin/products/create">
           <button className="btn btn-primary text-white btn-crud-add">
             ADICIONAR
           </button>
         </Link>
-
+        </div>
         <ProductFilter onSubmitFilter={handleSubmitFilter}/>
       </div>
 
