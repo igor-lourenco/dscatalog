@@ -1,37 +1,39 @@
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useHistory } from 'react-router';
-import { User } from 'types/user';
-import { Role } from 'types/role';
-import { useEffect, useState } from 'react';
+import { Users } from 'types/users';
 import { requestBackend } from 'util/requests';
 import { toast } from 'react-toastify';
 import { AxiosRequestConfig } from 'axios';
+import { Roles } from 'types/roles';
+import Select from 'react-select';
+import { useState } from 'react';
 
 const Signup = () => {
   const history = useHistory();
 
-  const [selectCategories, setSelectCategories] = useState<Role[]>([]);
+  const [selectRoles, setSelectRoles] = useState<Roles[]>([]);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue, //permite definir o valor de algum atributo
     control, // objeto de controle do hook form
-  } = useForm<User>();
+  } = useForm<Users>();
 
-  useEffect(() => {
+  /*useEffect(() => {
     //função pra carrega do backend quando o componente for montado
-    requestBackend({ url: '/users' }).then((response) => {
-      setSelectCategories(response.data.content); //Atribui o dados da resposta do backend no setSelectCategories
+    requestBackend({ url: '/users', method: 'POST' }).then((response) => {
+      setSelectRoles(response.data.content); //Atribui o dados da resposta do backend no setSelectCategories
     });
-  }, []);
+  }, []);*/
 
-  const onSubmit = (formData: User) => {
+  const onSubmit = (formData: Users) => {
     const config: AxiosRequestConfig = {
       method: 'POST', // se estiver editando, metodo 'PUT' senão 'POST'
       url: `/users`, // se estiver editando, metodo 'PUT' senão 'POST'
       withCredentials: false, //passa token no header da requisição
+      
+    
     };
 
     requestBackend(config)
@@ -46,7 +48,7 @@ const Signup = () => {
   };
 
   const handleCancel = () => {
-    history.push('/admin/products'); //volta para a listagem
+    history.push('/admin/auth'); //volta para a listagem
   };
 
   return (
@@ -76,6 +78,85 @@ const Signup = () => {
             {errors.firstName?.message}
           </div>
         </div>
+
+
+        <div className="margin-bottom-30">
+          <input
+            {...register('lastName', {
+              required: 'Campo obrigatório',
+            })}
+            type="text"
+            className={`form-control base-input ${
+              errors.lastName ? 'is-invalid' : ''
+            }`} //mostra o campo vermelho
+            placeholder="Segundo nome"
+            name="lastName"
+          />
+          <div className="invalid-feedback d-block">
+            {errors.lastName?.message}
+          </div>
+        </div>
+
+        <div className="margin-bottom-30">
+
+        <input
+            {...register('email', {
+              required: 'Campo obrigatório',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Email inválido',
+              },
+            })}
+            type="text"
+        className={`form-control base-input ${errors.email ? 'is-invalid' : ''}`} //mostra o campo vermelho
+            placeholder="Email"
+            name="email"
+          />
+          <div className="invalid-feedback d-block">
+            {errors.email?.message}
+          </div>
+</div>
+
+<div className="margin-bottom-30">
+
+<input
+            {...register('password', {
+              required: 'Campo obrigatório',
+            })}
+            type="password"
+            className={`form-control base-input ${errors.password ? 'is-invalid' : ''}`} //mostra o campo vermelho
+            placeholder="Senha"
+            name="password"
+          />
+        </div>
+        <div className="invalid-feedback d-block">
+          {errors.password?.message}
+        </div>
+
+
+
+
+
+
+
+
+
+         
+
+              <div className="product-crud-buttons-container">
+            <button
+              className="btn btn-outline-danger product-crud-button"
+              onClick={handleCancel}
+            >
+              CANCELAR
+            </button>
+            <button className="btn btn-outline-primary  product-crud-button">
+              SALVAR
+            </button>
+          </div>
+          
+        
+    
       </form>
     </div>
   );

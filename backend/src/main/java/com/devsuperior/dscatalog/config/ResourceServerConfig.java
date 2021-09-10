@@ -27,6 +27,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 	private static final String[] PUBLIC = {"/oauth/token", "/h2-console/**"};
 	private static final String[] OPERATOR_OR_ADMIN = {"/products/**", "/categories/**"};
 	private static final String[] ADMIN = {"/users/**"};
+	private static final String[] USER = {"/users"};
 	
 	@Autowired
 	private Environment env;
@@ -48,6 +49,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 		
 		http.authorizeRequests()
 		.antMatchers(PUBLIC).permitAll() //rota liberada pra quem quiser logar
+		.antMatchers(HttpMethod.POST, USER).permitAll() //rota liberada pra inserção de usuario
 		.antMatchers(HttpMethod.GET, OPERATOR_OR_ADMIN).permitAll() //rota liberada pra quem for admin ou operator 
 		.antMatchers(OPERATOR_OR_ADMIN).hasAnyRole("OPERATOR", "ADMIN") // rota liberada pra quem tiver um dos papeis
 		.antMatchers(ADMIN).hasRole("ADMIN") //todas as rotas liberadas pra quem for admin
