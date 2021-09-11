@@ -102,43 +102,15 @@ const Signup = () => {
                 errors.roles ? 'is-invalid' : ''
             }`}
             name='roles'
-            />
-            <label className="form-check-label" htmlFor="flexRadioDefault2">
-                Admin
-            </label>
-        </div>
-        <div className="form-check">
-             <input  type="radio" id="flexRadioDefault1"
-                {...register('roles',{
-                    required: 'Campo obrigatório',
-                    value: [{id: 1}]
-                    
-                } )}
-                className={` form-check-input  ${
-                    errors.roles ? 'is-invalid' : ''
-                }`}
-                name='roles'
-                />
-            <label className="form-check-label" htmlFor="flexRadioDefault1">
-                Operador
-            </label>
-        </div>
-        <div className="form-check">
-            <input  type="radio"  id="flexRadioDefault2"
-             {...register('roles',{
-                required: 'Campo obrigatório',
-                value: [{id: 2}]
-            } )}
-            className={` form-check-input  ${
-                errors.roles ? 'is-invalid' : ''
-            }`}
-            name='roles'
             checked
             />
             <label className="form-check-label" htmlFor="flexRadioDefault2">
                 Admin
             </label>
         </div>
+
+
+
         <div className="margin-bottom-30">
           <input
             {...register('email', {
