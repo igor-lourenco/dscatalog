@@ -76,35 +76,7 @@ const Signup = () => {
           </div>
         </div>
 
-        <div className="form-check ">
-             <input  type="radio" 
-                {...register('roles',{ 
-                    value: [{id: 1}]  
-                } )}
-                className={` form-check-input  ${
-                    errors.roles ? 'is-invalid' : ''
-                }`}
-                name='roles'
-                checked
-                />
-            <label className="form-check-label" >
-                Operador
-            </label>
-        </div>
-        <div className="form-check margin-select">
-            <input  type="radio"  
-             {...register('roles',{
-                value: [{id: 2}]
-            } )}
-            className={` form-check-input  ${
-                errors.roles ? 'is-invalid' : ''
-            }`}
-            name='roles'
-            />
-            <label className="form-check-label" >
-                Admin
-            </label>
-        </div>
+       
 
 
         <div className="margin-bottom-30">
