@@ -12,14 +12,14 @@ const Signup = () => {
   const { register,handleSubmit,formState: { errors }} = useForm<Users>();// objeto de controle do hook form
 
   const onSubmit = (formData: Users) => {
-      const data = {
+     /* const data = {
           ...formData,
           roles: [{id: 2, name: 'ROLE_ADMIN'}]
-      }
+      }*/
     const config: AxiosRequestConfig = {
       method: 'POST', // se estiver editando, metodo 'PUT' senão 'POST'
       url: `/users`, // se estiver editando, metodo 'PUT' senão 'POST'
-     data: data
+     data: formData
     };
 
     requestBackend(config)
@@ -75,6 +75,40 @@ const Signup = () => {
             {errors.lastName?.message}
           </div>
         </div>
+
+        <div className="form-check">
+             <input  type="radio" id="flexRadioDefault1"
+                {...register('roles',{
+                    required: 'Campo obrigatório',
+                    value: [{id: 1, name: 'ROLE_OPERATOR'}]
+                    
+                } )}
+                className={` form-check-input  ${
+                    errors.roles ? 'is-invalid' : ''
+                }`}
+                name='roles'
+                checked
+                />
+            <label className="form-check-label" htmlFor="flexRadioDefault1">
+                Operador
+            </label>
+        </div>
+        <div className="form-check">
+            <input  type="radio"  id="flexRadioDefault2"
+             {...register('roles',{
+                required: 'Campo obrigatório',
+                value: [{id: 2, name: 'ROLE_ADMIN'}]
+            } )}
+            className={` form-check-input  ${
+                errors.roles ? 'is-invalid' : ''
+            }`}
+            name='roles'
+            />
+            <label className="form-check-label" htmlFor="flexRadioDefault2">
+                Admin
+            </label>
+        </div>
+
 
         <div className="margin-bottom-30">
           <input
