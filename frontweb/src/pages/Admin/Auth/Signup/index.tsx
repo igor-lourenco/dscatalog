@@ -14,7 +14,7 @@ const Signup = () => {
   const onSubmit = (formData: Users) => {
       const data = {
           ...formData,
-          roles: [{id: 2}]
+          roles: [{id: 2, name: 'ROLE_ADMIN'}]
       }
     const config: AxiosRequestConfig = {
       method: 'POST', // se estiver editando, metodo 'PUT' senão 'POST'
