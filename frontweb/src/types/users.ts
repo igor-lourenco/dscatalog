@@ -6,5 +6,5 @@ export type Users = {
     lastName: string;
     email: string;
     password: string;
-    roles: Roles [];
+    roles?: Roles [];
 }

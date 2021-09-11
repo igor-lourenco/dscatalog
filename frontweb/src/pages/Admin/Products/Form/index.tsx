@@ -109,7 +109,9 @@ const Form = () => {
               </div>
 
               <div className="margin-bottom-30">
-                <label htmlFor="categories" className="d-none">Categorias</label>
+                <label htmlFor="categories" className="d-none">
+                  Categorias
+                </label>
                 <Controller //
                   name="categories" //nome do campo, tem q ser igual o nome do estado e do tipo Product
                   rules={{ required: true }} //regra de validação
