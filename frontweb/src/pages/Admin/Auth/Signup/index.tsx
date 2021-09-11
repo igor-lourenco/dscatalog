@@ -12,10 +12,14 @@ const Signup = () => {
   const { register,handleSubmit,formState: { errors }} = useForm<Users>();// objeto de controle do hook form
 
   const onSubmit = (formData: Users) => {
+      const data = {
+          ...formData,
+          roles: [{id: 2}]
+      }
     const config: AxiosRequestConfig = {
       method: 'POST', // se estiver editando, metodo 'PUT' senão 'POST'
       url: `/users`, // se estiver editando, metodo 'PUT' senão 'POST'
-     data: formData
+     data: data
     };
 
     requestBackend(config)
