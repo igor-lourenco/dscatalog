@@ -1,4 +1,4 @@
-# # Sobre o projeto 
+# Sobre o projeto 
 
 Projeto catálogo Bootcamp DevSuperior. 
 
@@ -7,7 +7,7 @@ Neste sistema, somente as rotas de leitura (GET) de categorias e produtos são p
 
 Site na nuvem usando netlify: https://ds-catalogo.netlify.app 
 
-https://www.figma.com/file/1n0aifcfatWv9ozp16XCrq/DSCatalog-Bootcamp
+Figma do projeto: https://www.figma.com/file/1n0aifcfatWv9ozp16XCrq/DSCatalog-Bootcamp
 
 
 ## Modelo conceitual
