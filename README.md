@@ -1,6 +1,6 @@
 # Sobre o projeto 
 
-Projeto catálogo de produtos Bootcamp DevSuperior. 
+Projeto catálogo de produtos. 
 
 Este é um sistema de produtos e categorias com uma relação N-1 entre eles.
 Neste sistema, somente as rotas de leitura (GET) de categorias e produtos são públicas (não precisa de login). Os demais acessos são permitidos apenas a usuários ADMIN.
